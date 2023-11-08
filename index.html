@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Azul APP</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.6rem;
+
+            background: #1E1E1E;
+        }
+
+        header {
+            margin-top: 1.0rem;
+            padding-inline: 1.0rem;
+
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            color: white;
+        }
+
+        .burger-menu {
+            width: 2.0rem;
+            height: 2.0rem;
+            margin-right: 1.0rem;
+
+            cursor: pointer;
+        }
+
+        .selection-city {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .export-menu {
+            width: 2.0rem;
+            height: 2.0rem;
+            margin-left: 1.0rem;
+
+            cursor: pointer;
+        }
+
+        .selection-car img {
+            width: 2.4rem;
+            height: 2.4rem;
+            background: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <div class="burger-menu">
+            <img src="images/menu.svg" alt="menu">
+        </div>
+        <div class="selection-city">
+            <p id="editable-text">Selecione sua cidade!</p><img src="images/chevron-down.svg" alt="">
+        </div>
+        <div class="export-menu">
+            <img src="images/share.svg" alt="export">
+        </div>
+
+    </header>
+
+    <body>
+        <div class="selection-car">
+            <img src="images/car.png" alt="car">
+        </div>
+    </body>
+</body>
+
+</html>
