@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.6rem;
+  background: #1e1e1e;
+}
+
+header {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding-inline: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.menu-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.city-selector {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.export-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.vehicle-selector {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+}
+
+.vehicle-selector img {
+  max-width: 5rem;
+}
+
+.vehicle-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 2rem;
+  padding: 0;
+}
+
+.vehicle-info span {
+  color: #a4a4a4;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.vehicle-info p {
+  color: #fff;
+}
+
+.button-tray {
+  display: flex;
+  justify-content: center;
+}
+
+.button-grid {
+  display: grid;
+  width: 80%;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; /* Adjust the gap as needed */
+  margin-block: 2rem;
+  margin-inline: 2rem;
+}
+
+.grid-span-2b2 {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+
+.grid-span-6b2 {
+  grid-row: span 6;
+  grid-column: span 2;
+}
+
+.grid-span-1b1{
+  grid-row: span 1;
+  grid-column: span 1;
+}
+
+.grid-span-3b1{
+  grid-row: span 3;
+  grid-column: span 1;
+}
+
+.button-grid button {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.button-tray button:hover {
+  background-color: #0055CC;
+}
+
+.button-inactive {
+  background: #333333;
+}
+
+.button-active {
+  background: rgb(0, 162, 255)
+}
+
+gm-map {
+  height: 100%;
+}
+
+@media (min-width: 700px) {
+  :root{
+    font-size: 100%;
+  }
+}

@@ -1,97 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zona Azul Parking App</title>
+    <link rel="stylesheet" href="index.css" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona Azul APP</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            font-size: 62.5%;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 1.6rem;
-
-            background: #1E1E1E;
-        }
-
-        header {
-            margin-top: 1.0rem;
-            padding-inline: 1.0rem;
-
-            width: 100%;
-            display: flex;
-            align-items: center;
-
-            color: white;
-        }
-
-        .burger-menu {
-            width: 2.0rem;
-            height: 2.0rem;
-            margin-right: 1.0rem;
-
-            cursor: pointer;
-        }
-
-        .selection-city {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: row;
-        }
-
-        .export-menu {
-            width: 2.0rem;
-            height: 2.0rem;
-            margin-left: 1.0rem;
-
-            cursor: pointer;
-        }
-
-        .selection-car img {
-            width: 2.4rem;
-            height: 2.4rem;
-
-        }
-    </style>
-</head>
-
-<body>
+    <link rel="stylesheet" href="index.css" />
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzcf1rRdiLIRaFjkUQZaLoSAlpzoEIHYk&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+  </head>
+  <body>
     <header>
-
-        <div class="burger-menu">
-            <img src="images/menu.svg" alt="menu">
-        </div>
-        <div class="selection-city">
-            <p id="editable-text">Selecione sua cidade!</p><img src="images/chevron-down.svg" alt="">
-        </div>
-        <div class="export-menu">
-            <img src="images/share.svg" alt="export">
-        </div>
-
+      <div class="menu-icon">
+        <img src="images/menu.svg" alt="Menu" />
+      </div>
+      <div class="city-selector">
+        <p id="editable-text">Selecione sua cidade</p>&nbsp;
+        <img src="images/chevron-down.svg" alt="" />
+      </div>
+      <div class="export-icon">
+        <img src="images/share.svg" alt="Export" />
+      </div>
     </header>
-
-    <body>
-        <div class="selection-car">
-            <img src="images/car.svg" alt="car">
-            <div>
-                
-            </div>
+    <main>
+      <section class="vehicle-selector">
+        <img src="images/car.svg" alt="Vehicle" />
+        <div class="vehicle-info">
+          <span>nenhum veiculo</span>
+          <p>Adicione seu veiculo</p>
         </div>
-    </body>
-</body>
-
+        <img src="images/plus.svg" alt="Add Vehicle" />
+      </div>
+      </section>
+      <section class="button-tray">
+        <div class="button-grid">
+            <button class="grid-span-2b2 button-active"><img src="images/map-pin.svg">Zona Azul</button>
+            <button class="grid-span-3b1 button-inactive"><img src="images/x-red.svg" /></button>
+            <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
+            <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
+            <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
+            <div class="grid-span-6b2" hidden>
+            <!--The div element for the map -->
+            <div id="overlay-gm-map"></div>
+              <gmp-map center="-22.12071418762207,-51.387351989746094" zoom="14" map-id="DEMO_MAP_ID">
+                <gmp-advanced-marker position="-22.12071418762207,-51.387351989746094" title="My location">
+                </gmp-advanced-marker>
+              </gmp-map>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
