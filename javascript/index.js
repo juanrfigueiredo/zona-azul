@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Cadastre um veículo para continuar');
             return;
         }
-        window.location.href = "estacionar.html";
+        window.location.href = "./pages/estacionar.html";
     });
 
 });

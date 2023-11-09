@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function loadBrandOptions() {
-        fetch(`json/${selectType.value}.brands.json`)
+        fetch(`../json/${selectType.value}.brands.json`)
             .then(response => response.json())
             .then(data => {
                 brands = data;
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
     saveButton.addEventListener('click', function () {
         if (validatePlaca()) {
             saveCarInformation();
-            window.location.href = "index.html";
+            window.location.href = "../index.html";
         } else {
             alert("Placa inválida. Preencha corretamente.");
         }
