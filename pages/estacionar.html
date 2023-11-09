@@ -16,10 +16,12 @@
         <div class="menu-icon">
             <img src="../images/menu.svg" alt="Menu" />
         </div>
-        <div class="city-selector">
+
+        <div class="city-selector" onclick="home()">
             <img src="../images/map-pin.svg" alt="Map Pin">&nbsp;
             <p id="editable-text">Presidente Prudente</p>
         </div>
+
         <div class="export-icon">
             <img src="../images/share.svg" alt="Export" />
         </div>
@@ -79,6 +81,12 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzcf1rRdiLIRaFjkUQZaLoSAlpzoEIHYk&callback=initMap&v=weekly"
         defer></script>
+
+    <script>
+        function home() {
+            window.location.href = "../index.html";
+        }
+    </script>
 </body>
 
 </html>

@@ -14,7 +14,7 @@
         <div class="menu-icon">
             <img src="../images/menu.svg" alt="Menu" />
         </div>
-        <div class="city-selector">
+        <div class="city-selector" onclick="home()">
             <img src="../images/map-pin.svg">&nbsp;<p id="editable-text">Presidente Prudente</p>
         </div>
         <div class="export-icon">
@@ -54,6 +54,11 @@
         <button class="button-active">Salvar Carro</button>
     </main>
     <script src="../javascript/vehicle-selector.js"></script>
+    <script>
+        function home() {
+            window.location.href = "../index.html";
+        }
+    </script>
 </body>
 
 </html>

@@ -56,16 +56,35 @@ document.addEventListener('DOMContentLoaded', function () {
         estacionar();
     });
 
+    const estacionadosArray = JSON.parse(localStorage.getItem('estacionados')) || [];
+    const placaExistente = estacionadosArray.find(estacionado => estacionado.placa === placa);
+    const naoExpirado = placaExistente ? new Date(placaExistente.expired_at) > new Date() : false;
+
+    verificarEstacionamento();
+
+    function verificarEstacionamento() {
+        // Obtenha a placa do veículo
+
+        // Verifique se a placa já existe no Local Storage
+
+        if (placaExistente) {
+            if (naoExpirado) {
+                document.getElementById('estacionarBtn').classList.add('placa-existente');
+            }
+        }
+    }
+
     function estacionar() {
 
         // Verifique se a placa já existe no Local Storage
-        const estacionadosArray = JSON.parse(localStorage.getItem('estacionados')) || [];
-        console.log(estacionadosArray);
-        const placaExistente = estacionadosArray.find(estacionado => estacionado.placa === placa);
-        const naoExpirado = placaExistente ? new Date(placaExistente.expired_at) > new Date() : false;
+
         if (placaExistente) {
             if (naoExpirado) {
-                alert('Esse veículo ja está estacionado. Por favor, escolha outro veículo.');
+                const diff = new Date(placaExistente.expired_at) - new Date();
+                const FaltaHoras = Math.floor(diff / (1000 * 60 * 60));
+                const FaltaMinutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const FaltaSegundos = Math.floor((diff % (1000 * 60)) / 1000);
+                alert(`Esse veículo já está estacionado.` + '\n' + `O tempo restante é de ${FaltaHoras > 0 ? FaltaHoras + ' horas, ' : ""}${FaltaMinutos > 0 ? FaltaMinutos + ' minutos e ' : ""}${FaltaSegundos} segundos.`);
                 return;
             }
             else {
@@ -97,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Exemplo: Exiba um alerta informando que o estacionamento foi salvo
         console.log('Estacionamento salvo no Local Storage!');
+        window.location.href = "./estacionado.html";
     }
 
 

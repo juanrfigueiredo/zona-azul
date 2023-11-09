@@ -156,16 +156,15 @@ header {
   font-weight: 700;
 }
 
-.button-tray button:hover {
-  background-color: #0055CC;
-}
-
 .button-inactive {
   background: #333333;
 }
 
 .button-active {
   background: rgb(0, 162, 255)
+}
+a {
+  text-decoration: none;
 }
 
 .button-logout {
@@ -187,6 +186,17 @@ header {
 
 .smaller-buttons button::after{
   width: 10%;
+}
+
+.placa-existente {
+  background-color: #632c00;
+  /* Cor de fundo marrom */
+  color: #cfcfcf;
+  /* Texto branco */
+  border: 1px solid #632c00;
+  /* Borda marrom */
+  cursor: not-allowed;
+  /* Cursor de "não permitido" */
 }
 
 @media (min-width: 700px) {
