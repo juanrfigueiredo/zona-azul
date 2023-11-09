@@ -16,6 +16,10 @@ body {
   background: #1e1e1e;
 }
 
+a {
+  text-decoration: none;
+}
+
 header {
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -56,7 +60,7 @@ header {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  gap: 1rem;
+  gap: 2rem;
   width: 100%;
 }
 
@@ -71,6 +75,9 @@ header {
 .vehicle-info {
   display: flex;
   flex-direction: column;
+  min-width: 30%;
+  justify-content: center;
+  align-items: center; 
   line-height: 2rem;
   padding: 0;
 }
@@ -94,7 +101,7 @@ header {
 .button-grid {
   display: grid;
   width: 80%;
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem; /* Adjust the gap as needed */
   margin-block: 2rem;
@@ -106,8 +113,23 @@ header {
   grid-column: span 2;
 }
 
+.grid-span-4b2 {
+  grid-row: span 4;
+  grid-column: span 2;
+}
+
 .grid-span-6b2 {
   grid-row: span 6;
+  grid-column: span 2;
+}
+
+.grid-span-8b2 {
+  grid-row: span 8;
+  grid-column: span 2;
+}
+
+.grid-span-10b2 {
+  grid-row: span 10;
   grid-column: span 2;
 }
 
@@ -146,8 +168,25 @@ header {
   background: rgb(0, 162, 255)
 }
 
-gm-map {
+.button-logout {
+  background: rgb(144, 18, 4)
+}
+
+
+.map-container {
+  width: 80%;
+  height: 40vh;
+  margin: 0 auto;
+}
+
+#map {
   height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.smaller-buttons button::after{
+  width: 10%;
 }
 
 @media (min-width: 700px) {

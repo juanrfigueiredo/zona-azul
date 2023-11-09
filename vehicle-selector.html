@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/parking.png" type="image/x-icon" />
+    <title>Zona Azul Parking App</title>
+    <link rel="stylesheet" href="css/vehicle-selector.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu-icon">
+            <img src="images/menu.svg" alt="Menu" />
+        </div>
+        <div class="city-selector">
+            <img src="images/map-pin.svg">&nbsp;<p id="editable-text">Presidente Prudente</p>
+        </div>
+        <div class="export-icon">
+            <img src="images/share.svg" alt="Export" />
+        </div>
+    </header>
+    <main>
+
+        <div class="select-container">
+            <label for="selectType">Tipo: </label>
+            <select name="selectType" id="selectType">
+                <option value="cars">Carro</option>
+                <option value="motorcycles">Moto</option>
+            </select>
+        </div>
+        <div class="select-container">
+            <label for="selectBrand">Escolha uma marca:</label>
+            <input type="text" id="selectBrandInput" placeholder="Filtrar">
+            <select id="selectBrand" class="brand-select"></select>
+        </div>
+        <div class="select-container">
+            <label for="selectModel">Escolha um modelo:</label>
+            <input type="text" id="selectModelInput" placeholder="Filtrar">
+            <select id="selectModel" class="make-select"></select>
+        </div>
+        <div class="select-container">
+            <label for="placa">Placa:</label>
+            <!--apenas numeros ou letras-->
+            <div class="placa-container">
+                <input type="text" id="placa-p1" placeholder="" pattern="" style="text-transform: uppercase;"
+                    maxlength="3" minlength="3">
+                <input type="text" id="placa-p2" style="text-transform: uppercase;" placeholder="" pattern=""
+                    maxlength="4" minlength="4">
+            </div>
+        </div>
+
+        <button class="button-active">Salvar Carro</button>
+    </main>
+    <script src="javascript/vehicle-selector.js"></script>
+</body>
+
+</html>

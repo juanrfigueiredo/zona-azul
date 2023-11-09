@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.6rem;
+  background: #1e1e1e;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding-inline: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.menu-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.city-selector {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.export-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 80%;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.select-container {
+    display: flex;
+    flex-direction: column;
+    grid-row: span 1;
+    gap: 0.5rem;
+}
+
+.select-container {
+    display: flex;
+    flex-direction: column;
+    grid-row: span 2;
+    gap: 0.5rem;
+}
+
+
+select, input {
+    padding-block: 1rem;
+    text-align: center;
+    border: 0px solid #a4a4a4;
+    border-radius: 5px;
+    background-color: #333333;
+    width: 100%;
+    color: white;
+    font-size: 1.6rem;
+}
+
+::placeholder {
+    color: rgb(195, 195, 195)
+}
+
+.placa-container {
+    display: flex;
+    flex-direction: row;
+    grid-row: span 1;
+    gap: 0.5rem;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    color: #a4a4a4;
+    text-transform: uppercase;
+    font-weight: 600;
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.button-active {
+    background: rgb(0, 162, 255)
+}
+
+@media (min-width: 700px) {
+    :root{
+      font-size: 100%;
+    }
+}

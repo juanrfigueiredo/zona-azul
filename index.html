@@ -2,19 +2,14 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zona Azul Parking App</title>
-    <link rel="stylesheet" href="index.css" />
-
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-    <link rel="stylesheet" href="index.css" />
-    <!---flavicon-->
-    <link rel="shortcut icon" href="images/zona-azul.png" type="image/x-icon" />
-    <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzcf1rRdiLIRaFjkUQZaLoSAlpzoEIHYk&callback=console.debug&libraries=maps,marker&v=beta">
-        </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="images/parking.png" type="image/x-icon" />
+    <title>Zona Azul Parking App</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="javascript/index.js"></script>
 </head>
 
 <body>
@@ -30,33 +25,41 @@
         </div>
     </header>
     <main>
-        <section class="vehicle-selector">
-            <img src="images/car.svg" alt="Vehicle" />
-            <div class="vehicle-info">
-                <span id="vehicle-type">nenhum veiculo</span>
-                <p id="vehicle-model">Adicione seu veiculo</p>
-            </div>
-            <img src="images/plus.svg" alt="Add Vehicle" />
-            </div>
-        </section>
+        <a href="vehicle-selector.html">
+            <section class="vehicle-selector">
+                <img src="images/car.svg" alt="Vehicle" />
+                <div class="vehicle-info">
+                    <div>
+                        <span id="vehicle-type">nenhum veiculo</span>
+                        <p id="vehicle-model">Adicione seu veiculo</p>
+                    </div>
+                </div>
+                <img src="images/plus.svg" alt="Add Vehicle" />
+                </div>
+            </section>
+        </a>
         <section class="button-tray">
             <div class="button-grid">
-                <button class="grid-span-2b2 button-active">Zona Azul</button>
+                <button class="grid-span-2b2 button-logout" id="logout" hidden>Remover Carro</button>
+                <button class="grid-span-4b2 button-active" id="zona-azul">Estacionar</button>
+                <!--
                 <button class="grid-span-3b1 button-inactive"><img src="images/x-red.svg" /></button>
                 <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
                 <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
                 <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
-                <div class="grid-span-6b2">
-                    <!--The div element for the map -->
-                    <div id="overlay-gm-map"></div>
-                    <gmp-map center="-22.12071418762207,-51.387351989746094" zoom="14" map-id="DEMO_MAP_ID">
-                        <gmp-advanced-marker position="-22.12071418762207,-51.387351989746094" title="My location">
-                        </gmp-advanced-marker>
-                    </gmp-map>
-                </div>
+                -->
             </div>
         </section>
+
+        <section class="map-container">
+            <div id="map"></div>
+        </section>
     </main>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzcf1rRdiLIRaFjkUQZaLoSAlpzoEIHYk&callback=initMap&v=weekly"
+        defer>
+        </script>
 </body>
 
 </html>

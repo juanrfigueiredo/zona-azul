@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.6rem;
+    background: #1e1e1e;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding-inline: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.menu-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.city-selector {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.export-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.vehicle-selector {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+    width: 100%;
+}
+
+.vehicle-selector:hover {
+    background-color: #333333;
+}
+
+.vehicle-selector img {
+    max-width: 5rem;
+}
+
+.vehicle-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 30%;
+    justify-content: center;
+    align-items: center;
+    line-height: 2rem;
+    padding: 0;
+}
+
+.vehicle-info span {
+    color: #a4a4a4;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.vehicle-info p {
+    color: #fff;
+}
+
+#top-bar {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+#top-bar img {
+    max-height: 40px;
+    /* Adjust the height as needed */
+    margin-left: 10px;
+    /* Adjust the margin as needed */
+}
