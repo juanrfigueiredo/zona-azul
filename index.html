@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zona Azul Parking App</title>
@@ -9,49 +10,51 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <link rel="stylesheet" href="index.css" />
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzcf1rRdiLIRaFjkUQZaLoSAlpzoEIHYk&callback=console.debug&libraries=maps,marker&v=beta">
-    </script>
-  </head>
-  <body>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzcf1rRdiLIRaFjkUQZaLoSAlpzoEIHYk&callback=console.debug&libraries=maps,marker&v=beta">
+        </script>
+</head>
+
+<body>
     <header>
-      <div class="menu-icon">
-        <img src="images/menu.svg" alt="Menu" />
-      </div>
-      <div class="city-selector">
-        <p id="editable-text">Selecione sua cidade</p>&nbsp;
-        <img src="images/chevron-down.svg" alt="" />
-      </div>
-      <div class="export-icon">
-        <img src="images/share.svg" alt="Export" />
-      </div>
+        <div class="menu-icon">
+            <img src="images/menu.svg" alt="Menu" />
+        </div>
+        <div class="city-selector">
+            <img src="images/map-pin.svg">&nbsp;<p id="editable-text">Presidente Prudente</p>
+        </div>
+        <div class="export-icon">
+            <img src="images/share.svg" alt="Export" />
+        </div>
     </header>
     <main>
-      <section class="vehicle-selector">
-        <img src="images/car.svg" alt="Vehicle" />
-        <div class="vehicle-info">
-          <span>nenhum veiculo</span>
-          <p>Adicione seu veiculo</p>
-        </div>
-        <img src="images/plus.svg" alt="Add Vehicle" />
-      </div>
-      </section>
-      <section class="button-tray">
-        <div class="button-grid">
-            <button class="grid-span-2b2 button-active"><img src="images/map-pin.svg">Zona Azul</button>
-            <button class="grid-span-3b1 button-inactive"><img src="images/x-red.svg" /></button>
-            <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
-            <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
-            <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
-            <div class="grid-span-6b2" hidden>
-            <!--The div element for the map -->
-            <div id="overlay-gm-map"></div>
-              <gmp-map center="-22.12071418762207,-51.387351989746094" zoom="14" map-id="DEMO_MAP_ID">
-                <gmp-advanced-marker position="-22.12071418762207,-51.387351989746094" title="My location">
-                </gmp-advanced-marker>
-              </gmp-map>
-          </div>
-        </div>
-      </section>
+        <section class="vehicle-selector">
+            <img src="images/car.svg" alt="Vehicle" />
+            <div class="vehicle-info">
+                <span>nenhum veiculo</span>
+                <p>Adicione seu veiculo</p>
+            </div>
+            <img src="images/plus.svg" alt="Add Vehicle" />
+            </div>
+        </section>
+        <section class="button-tray">
+            <div class="button-grid">
+                <button class="grid-span-2b2 button-active">Zona Azul</button>
+                <button class="grid-span-3b1 button-inactive"><img src="images/x-red.svg" /></button>
+                <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
+                <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
+                <button class="grid-span-1b1 button-inactive"><img src="images/x-red.svg" /></button>
+                <div class="grid-span-6b2">
+                    <!--The div element for the map -->
+                    <div id="overlay-gm-map"></div>
+                    <gmp-map center="-22.12071418762207,-51.387351989746094" zoom="14" map-id="DEMO_MAP_ID">
+                        <gmp-advanced-marker position="-22.12071418762207,-51.387351989746094" title="My location">
+                        </gmp-advanced-marker>
+                    </gmp-map>
+                </div>
+            </div>
+        </section>
     </main>
-  </body>
+</body>
+
 </html>
