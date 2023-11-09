@@ -17,10 +17,6 @@ body {
   color: white;
 }
 
-a {
-  text-decoration: none;
-}
-
 header {
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -54,78 +50,74 @@ header {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 80%;
-    margin: 0 auto;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  gap: 1rem;
 }
 
 .select-container {
-    display: flex;
-    flex-direction: column;
-    grid-row: span 1;
-    gap: 0.5rem;
-}
-
-.select-container {
-    display: flex;
-    flex-direction: column;
-    grid-row: span 2;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  grid-row: span 2;
+  gap: 0.5rem;
 }
 
 
-select, input {
-    padding-block: 1rem;
-    text-align: center;
-    border: 0px solid #a4a4a4;
-    border-radius: 5px;
-    background-color: #333333;
-    width: 100%;
-    color: white;
-    font-size: 1.6rem;
+select,
+input {
+  padding-block: 1rem;
+  text-align: center;
+  border: 0px solid #a4a4a4;
+  border-radius: 5px;
+  background-color: #333333;
+  width: 100%;
+  color: white;
+  font-size: 1.6rem;
 }
 
 ::placeholder {
-    color: rgb(195, 195, 195)
+  color: rgb(195, 195, 195)
 }
 
 .placa-container {
-    display: flex;
-    flex-direction: row;
-    grid-row: span 1;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  grid-row: span 1;
+  gap: 0.5rem;
 }
 
 label {
-    margin-bottom: 0.5rem;
-    color: #a4a4a4;
-    text-transform: uppercase;
-    font-weight: 600;
-    width: 100%;
+  margin-bottom: 0.5rem;
+  color: #a4a4a4;
+  text-transform: uppercase;
+  font-weight: 600;
+  width: 100%;
 }
 
 button {
-    width: 100%;
-    margin: 0 auto;
-    padding: 1rem;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: 700;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .button-active {
-    background: rgb(0, 162, 255)
+  background: rgb(0, 162, 255)
 }
 
+
+
 @media (min-width: 700px) {
-    :root{
-      font-size: 100%;
-    }
+  :root {
+    font-size: 100%;
+  }
 }
