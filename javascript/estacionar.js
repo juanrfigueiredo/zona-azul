@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Exemplo: Exiba um alerta informando que o estacionamento foi salvo
         console.log('Estacionamento salvo no Local Storage!');
-        window.location.href = "./estacionado.html";
+        window.location.href = "../pages/estacionar.html";
     }
 
 
