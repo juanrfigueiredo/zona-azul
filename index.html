@@ -10,6 +10,8 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <link rel="stylesheet" href="index.css" />
+    <!---flavicon-->
+    <link rel="shortcut icon" href="images/zona-azul.png" type="image/x-icon" />
     <script async
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzcf1rRdiLIRaFjkUQZaLoSAlpzoEIHYk&callback=console.debug&libraries=maps,marker&v=beta">
         </script>
@@ -31,8 +33,8 @@
         <section class="vehicle-selector">
             <img src="images/car.svg" alt="Vehicle" />
             <div class="vehicle-info">
-                <span>nenhum veiculo</span>
-                <p>Adicione seu veiculo</p>
+                <span id="vehicle-type">nenhum veiculo</span>
+                <p id="vehicle-model">Adicione seu veiculo</p>
             </div>
             <img src="images/plus.svg" alt="Add Vehicle" />
             </div>

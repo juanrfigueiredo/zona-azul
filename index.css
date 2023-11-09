@@ -60,6 +60,10 @@ header {
   width: 100%;
 }
 
+.vehicle-selector:hover {
+  background-color: #333333;
+}
+
 .vehicle-selector img {
   max-width: 5rem;
 }
