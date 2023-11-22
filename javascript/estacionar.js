@@ -1,6 +1,8 @@
-// Função para inicializar o mapa
 function initMap() {
-  const initialLocation = { lat: -22.12071418762207, lng: -51.387351989746094 };
+  const initialLocation = {
+    lat: -22.12071418762207,
+    lng: -51.387351989746094,
+  };
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 15,
     center: initialLocation,
@@ -16,85 +18,104 @@ function initMap() {
   });
 }
 
-// Espera o carregamento do DOM para executar o código
 document.addEventListener("DOMContentLoaded", function () {
-  // Inicialização do mapa
   initMap();
 
-  // Obtenção das informações do carro do armazenamento local
   const carInfo = JSON.parse(localStorage.getItem("carInfo")) ?? null;
   const { model, placa } = carInfo || {};
 
-  // Atualização das informações no HTML se houver informações do carro
   if (carInfo) {
+    updateVehicleInfo(model, placa);
+  }
+
+  colorParkingButton(placa);
+
+  addClickEventToRadioLabels();
+  addClickEventToParkingButton(placa);
+  addClickEventToPayButton(placa);
+  addClickEventToCopyButton();
+  addClickEventToCloseButton();
+
+  // Função para atualizar as informações do veículo no HTML
+  function updateVehicleInfo(model, placa) {
     document.getElementById("vehicle-type").textContent = model;
     document.getElementById("vehicle-model").innerHTML = placa;
   }
 
-  // Adiciona evento de clique aos rótulos para chamar a função selectRadio
-  const radioLabels = document.querySelectorAll(".radio-label");
-  radioLabels.forEach((label) => {
-    label.addEventListener("click", function () {
-      const input = label.querySelector("input");
-      selectRadio(input.value);
-    });
-  });
-
-  // Função para selecionar o botão de rádio correspondente
-  function selectRadio(value) {
+  function addClickEventToRadioLabels() {
     const radioLabels = document.querySelectorAll(".radio-label");
-
     radioLabels.forEach((label) => {
-      const input = label.querySelector("input");
-      if (input.value === value.toString()) {
-        input.checked = true;
-        label.classList.add("selected");
+      label.addEventListener("click", function () {
+        const input = label.querySelector("input");
+        const selectedValue = input.value;
+
+        radioLabels.forEach((otherLabel) => {
+          const otherInput = otherLabel.querySelector("input");
+          if (otherInput.value === selectedValue) {
+            otherInput.checked = true;
+            otherLabel.classList.add("selected");
+          } else {
+            otherInput.checked = false;
+            otherLabel.classList.remove("selected");
+          }
+        });
+      });
+    });
+  }
+
+  function isExpired(car) {
+    const expiredDate = new Date(car.expired_at);
+    const currentDate = new Date();
+    return expiredDate < currentDate;
+  }
+
+  function isParked(placa) {
+    const parkedCars = JSON.parse(localStorage.getItem("estacionados")) ?? [];
+    const parkedCar = parkedCars.find(
+      (car) => car.placa === placa && !isExpired(car)
+    );
+    return !!parkedCar;
+  }
+
+  function closeModal() {
+    qrModal.style.display = "none";
+  }
+
+  function openModal() {
+    const qrModal = document.getElementById("qrModal");
+    const quantidadeCartoes = returnSelectedCardValue();
+    const costSpan = document.getElementById("quantCartoes");
+    const qrModalImage = document.getElementById("qrCodeImage");
+
+    if (quantidadeCartoes == 1) {
+      qrModalImage.src = "../images/1hr.png";
+      costSpan.textContent = "R$ 2,50";
+    } else {
+      qrModalImage.src = "../images/2hr.png";
+      costSpan.textContent = "R$ 5,00";
+    }
+
+    qrModal.style.display = "flex";
+  }
+
+  function addClickEventToParkingButton(placa) {
+    const parkingButton = document.getElementById("estacionarBtn");
+    parkingButton.addEventListener("click", function () {
+      if (!isParked(placa)) {
+        openModal();
       } else {
-        input.checked = false;
-        label.classList.remove("selected");
+        showEstacionamentoStatus(placa);
       }
     });
   }
 
-  // Obtenção da referência do botão "Estacionar"
-  const estacionarButton = document.getElementById("estacionarBtn");
-  estacionarButton.addEventListener("click", function () {
-    // Verifica se a placa existe e se não expirou
-    if (placaExistente && naoExpirado) {
-      document.getElementById("estacionarBtn").classList.add("placa-existente");
-      showEstacionamentoStatus();
-      return;
-    }
-    openModal();
-  });
-
-  // Verifica se a placa existe nos carros estacionados
-  const estacionadosArray =
-    JSON.parse(localStorage.getItem("estacionados")) || [];
-  const placaExistente = estacionadosArray.find(
-    (estacionado) => estacionado.placa === placa
-  );
-  const naoExpirado = placaExistente
-    ? new Date(placaExistente.expired_at) > new Date()
-    : false;
-
-  verificarEstacionamento();
-
-  // Função para verificar o status do estacionamento
-  function verificarEstacionamento() {
-    if (placaExistente && naoExpirado) {
-      document.getElementById("estacionarBtn").classList.add("placa-existente");
-    }
-  }
-
-  // Exibe o status do estacionamento
-  function showEstacionamentoStatus() {
-    // Cálculo do tempo restante do estacionamento
-    const diff = new Date(placaExistente.expired_at) - new Date();
+  function showEstacionamentoStatus(placa) {
+    const parkedCars = JSON.parse(localStorage.getItem("estacionados")) ?? [];
+    const car = parkedCars.find((car) => car.placa === placa);
+    const diff = new Date(car.expired_at) - new Date();
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
     alert(
       `Esse veículo já está estacionado.\nO tempo restante é de ${
         hours > 0 ? hours + " horas, " : ""
@@ -102,90 +123,85 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // Função para realizar o processo de estacionamento
-  function estacionar() {
-    if (placaExistente && naoExpirado) {
-      showEstacionamentoStatus();
-    } else if (placaExistente) {
-      estacionadosArray.splice(estacionadosArray.indexOf(placaExistente), 1);
+  function colorParkingButton(placa) {
+    const parkingButton = document.getElementById("estacionarBtn");
+    if (isParked(placa)) {
+      parkingButton.classList.add("placa-existente");
+    }
+  }
+
+  function returnSelectedCardValue() {
+    const selectedCard = document.querySelector('input[name="cartao"]:checked');
+    return selectedCard.value;
+  }
+
+  function parkTheCar(placa) {
+    const parkedCars = JSON.parse(localStorage.getItem("estacionados")) ?? [];
+    const parkedCar = parkedCars.find((car) => car.placa === placa);
+    const carParkingExpired = parkedCar
+      ? new Date(parkedCar?.expired_at) < new Date()
+      : undefined;
+
+    if (parkedCar && !carParkingExpired) {
+      showEstacionamentoStatus(placa);
+    } else if (parkedCar) {
+      parkedCars.splice(parkedCars.indexOf(parkedCar), 1);
     }
 
-    const quantidadeCartoes = document.querySelector(
-      'input[name="cartao"]:checked'
-    ).value;
-    const horasDeExpiracao = quantidadeCartoes * 1;
-    const dataAtual = new Date();
-
-    const estacionadoInfo = {
-      created_at: dataAtual.toISOString(),
+    const cardQuant = returnSelectedCardValue();
+    const hoursToExpire = cardQuant * 1;
+    const now = new Date();
+    const parkingInfo = {
+      created_at: now.toISOString(),
       expired_at: new Date(
-        dataAtual.getTime() + horasDeExpiracao * 60 * 60 * 1000
+        now.getTime() + hoursToExpire * 60 * 60 * 1000
       ).toISOString(),
       placa: placa,
     };
 
-    estacionadosArray.push(estacionadoInfo);
-    localStorage.setItem("estacionados", JSON.stringify(estacionadosArray));
-
+    parkedCars.push(parkingInfo);
+    localStorage.setItem("estacionados", JSON.stringify(parkedCars));
     console.log("Estacionamento salvo no Local Storage!");
+
     window.location.href = "../pages/estacionar.html";
   }
 
-  //------------------------QR CODE------------------------//
-  const qrModal = document.getElementById("qrModal");
-  const qrModalContent = document.getElementById("qrModalContent");
-  const copyToClipboardBtn = document.getElementById("copyToClipboardBtn");
-  const paguedBtn = document.getElementById("paguedBtn");
-  const qrCodeImage = document.getElementById("qrCodeImage");
-  const closeBtn = document.getElementById("closeBtn");
-  const costSpan = document.getElementById("quantCartoes");
-
-  // Function to open the modal
-  function openModal() {
-    const quantidadeCartoes = document.querySelector(
-      'input[name="cartao"]:checked'
-    ).value;
-    qrCodeImage.src =
-      quantidadeCartoes == 1 ? "../images/1hr.png" : "../images/2hr.png";
-
-    costSpan.textContent = quantidadeCartoes == 1 ? "R$ 2,50" : "R$ 5,00";
-    costSpan.style.color = "#000";
-    qrModal.style.display = "flex";
+  function addClickEventToPayButton(placa) {
+    const payButton = document.getElementById("paguedBtn");
+    payButton.addEventListener("click", function () {
+      parkTheCar(placa);
+    });
   }
 
-  closeBtn.addEventListener("click", function () {
-    closeModal();
-  });
+  function addClickEventToCopyButton() {
+    let qrCodeText = "";
+    const copyButton = document.getElementById("copyToClipboardBtn");
+    const cardQuant = returnSelectedCardValue();
+    copyButton.addEventListener("click", function () {
+      if (cardQuant == 1) {
+        qrCodeText =
+          "00020126580014BR.GOV.BCB.PIX01365f147f51-91bb-4015-b70e-c038571fd91d52040000530398654042.505802BR5925Juan Rodrigues Figueiredo6009SAO PAULO62140510JLISxwTr9d630462EF";
+      } else {
+        qrCodeText =
+          "00020126580014BR.GOV.BCB.PIX01365f147f51-91bb-4015-b70e-c038571fd91d52040000530398654045.005802BR5925Juan Rodrigues Figueiredo6009SAO PAULO621405108uVAScLPGm63045234";
+      }
 
-  // Function to close the modal
-  function closeModal() {
-    qrModal.style.display = "none";
+      navigator.clipboard
+        .writeText(qrCodeText)
+        .then(() => {
+          // Success message or toast
+          alert("Texto do código QR copiado!");
+        })
+        .catch((err) => {
+          console.error("Error copying to clipboard: ", err);
+        });
+    });
   }
 
-  // Event listener for copying QR code text to clipboard
-  copyToClipboardBtn.addEventListener("click", function () {
-    const quantidadeCartoes = document.querySelector(
-      'input[name="cartao"]:checked'
-    ).value;
-
-    const qrCodeText =
-      quantidadeCartoes == 1
-        ? "00020126580014BR.GOV.BCB.PIX01365f147f51-91bb-4015-b70e-c038571fd91d52040000530398654042.505802BR5925Juan Rodrigues Figueiredo6009SAO PAULO62140510JLISxwTr9d630462EF"
-        : "00020126580014BR.GOV.BCB.PIX01365f147f51-91bb-4015-b70e-c038571fd91d52040000530398654045.005802BR5925Juan Rodrigues Figueiredo6009SAO PAULO621405108uVAScLPGm63045234"; // Replace with your QR code text
-    navigator.clipboard
-      .writeText(qrCodeText)
-      .then(() => {
-        // Success message or toast
-        alert("Texto do código QR copiado!");
-      })
-      .catch((err) => {
-        console.error("Error copying to clipboard: ", err);
-      });
-  });
-
-  // Event listener for "PAGUEI!" button click
-  paguedBtn.addEventListener("click", function () {
-    estacionar();
-    closeModal();
-  });
+  function addClickEventToCloseButton() {
+    const closeButton = document.getElementById("closeBtn");
+    closeButton.addEventListener("click", function () {
+      closeModal();
+    });
+  }
 });
