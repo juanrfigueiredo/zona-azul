@@ -1,30 +1,37 @@
+// Função para inicializar o mapa
 function initMap() {
+  const initialLocation = { lat: -22.12071418762207, lng: -51.387351989746094 };
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 15,
-    center: { lat: -22.12071418762207, lng: -51.387351989746094 },
+    center: initialLocation,
     disableDefaultUI: true,
     zoomControl: true,
     controlSize: 20,
   });
+
+  // Adicionando marcador ao mapa
   new google.maps.Marker({
-    position: { lat: -22.12071418762207, lng: -51.387351989746094 },
+    position: initialLocation,
     map,
   });
 }
 
+// Espera o carregamento do DOM para executar o código
 document.addEventListener("DOMContentLoaded", function () {
+  // Inicialização do mapa
   initMap();
-  //get car info from local storage
-  const carInfo = JSON.parse(localStorage.getItem("carInfo")) ?? null;
-  const { type, brand, model, placa } = carInfo;
 
+  // Obtenção das informações do carro do armazenamento local
+  const carInfo = JSON.parse(localStorage.getItem("carInfo")) ?? null;
+  const { model, placa } = carInfo || {};
+
+  // Atualização das informações no HTML se houver informações do carro
   if (carInfo) {
     document.getElementById("vehicle-type").textContent = model;
     document.getElementById("vehicle-model").innerHTML = placa;
   }
 
-  //add on click to the labels to call selectRadio function
-
+  // Adiciona evento de clique aos rótulos para chamar a função selectRadio
   const radioLabels = document.querySelectorAll(".radio-label");
   radioLabels.forEach((label) => {
     label.addEventListener("click", function () {
@@ -33,12 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Função para selecionar o botão de rádio correspondente
   function selectRadio(value) {
     const radioLabels = document.querySelectorAll(".radio-label");
 
     radioLabels.forEach((label) => {
       const input = label.querySelector("input");
-      console.log(input.value, value);
       if (input.value === value.toString()) {
         input.checked = true;
         label.classList.add("selected");
@@ -49,11 +56,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Obtenção da referência do botão "Estacionar"
   const estacionarButton = document.getElementById("estacionarBtn");
   estacionarButton.addEventListener("click", function () {
+    // Verifica se a placa existe e se não expirou
+    if (placaExistente && naoExpirado) {
+      document.getElementById("estacionarBtn").classList.add("placa-existente");
+      showEstacionamentoStatus();
+      return;
+    }
     openModal();
   });
 
+  // Verifica se a placa existe nos carros estacionados
   const estacionadosArray =
     JSON.parse(localStorage.getItem("estacionados")) || [];
   const placaExistente = estacionadosArray.find(
@@ -65,58 +80,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
   verificarEstacionamento();
 
+  // Função para verificar o status do estacionamento
   function verificarEstacionamento() {
-    // Obtenha a placa do veículo
-
-    // Verifique se a placa já existe no Local Storage
-
-    if (placaExistente) {
-      if (naoExpirado) {
-        document
-          .getElementById("estacionarBtn")
-          .classList.add("placa-existente");
-      }
+    if (placaExistente && naoExpirado) {
+      document.getElementById("estacionarBtn").classList.add("placa-existente");
     }
   }
 
-  function estacionar() {
-    // Verifique se a placa já existe no Local Storage
+  // Exibe o status do estacionamento
+  function showEstacionamentoStatus() {
+    // Cálculo do tempo restante do estacionamento
+    const diff = new Date(placaExistente.expired_at) - new Date();
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    if (placaExistente) {
-      if (naoExpirado) {
-        const diff = new Date(placaExistente.expired_at) - new Date();
-        const FaltaHoras = Math.floor(diff / (1000 * 60 * 60));
-        const FaltaMinutos = Math.floor(
-          (diff % (1000 * 60 * 60)) / (1000 * 60)
-        );
-        const FaltaSegundos = Math.floor((diff % (1000 * 60)) / 1000);
-        alert(
-          `Esse veículo já está estacionado.` +
-            "\n" +
-            `O tempo restante é de ${
-              FaltaHoras > 0 ? FaltaHoras + " horas, " : ""
-            }${
-              FaltaMinutos > 0 ? FaltaMinutos + " minutos e " : ""
-            }${FaltaSegundos} segundos.`
-        );
-        return;
-      } else {
-        estacionadosArray.splice(estacionadosArray.indexOf(placaExistente), 1);
-      }
+    alert(
+      `Esse veículo já está estacionado.\nO tempo restante é de ${
+        hours > 0 ? hours + " horas, " : ""
+      }${minutes > 0 ? minutes + " minutos e " : ""}${seconds} segundos.`
+    );
+  }
+
+  // Função para realizar o processo de estacionamento
+  function estacionar() {
+    if (placaExistente && naoExpirado) {
+      showEstacionamentoStatus();
+    } else if (placaExistente) {
+      estacionadosArray.splice(estacionadosArray.indexOf(placaExistente), 1);
     }
 
-    // Obtenha a quantidade de cartões selecionados
     const quantidadeCartoes = document.querySelector(
       'input[name="cartao"]:checked'
     ).value;
-
-    // Calcule a data de expiração (em horas)
     const horasDeExpiracao = quantidadeCartoes * 1;
-
-    // Obtenha a data e hora atual
     const dataAtual = new Date();
 
-    // Crie o objeto com as informações
     const estacionadoInfo = {
       created_at: dataAtual.toISOString(),
       expired_at: new Date(
@@ -125,13 +124,9 @@ document.addEventListener("DOMContentLoaded", function () {
       placa: placa,
     };
 
-    // Adicione o objeto ao array
     estacionadosArray.push(estacionadoInfo);
-
-    // Converta o array para uma string JSON e armazene no Local Storage
     localStorage.setItem("estacionados", JSON.stringify(estacionadosArray));
 
-    // Exemplo: Exiba um alerta informando que o estacionamento foi salvo
     console.log("Estacionamento salvo no Local Storage!");
     window.location.href = "../pages/estacionar.html";
   }
@@ -181,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .writeText(qrCodeText)
       .then(() => {
         // Success message or toast
-        alert("Texto do código copiado!");
+        alert("Texto do código QR copiado!");
       })
       .catch((err) => {
         console.error("Error copying to clipboard: ", err);
